@@ -11,13 +11,32 @@ getView: function ()
   });
   var slider1 = Ti.UI.createImageView({image:'images/slider.png',height:60,width:340, top:130});
   mainView.add(slider1);
+  var slider1Lbl = Ti.UI.createLabel({
+          top: 35,height:20,font:{fontSize:13,fontWeight:'bold'},color:'#b77f2f',
+          left: 135,width:100,
+          text:"Reports"
+  }); 
+  mainView.add(slider1Lbl);
   
+          
   var slider2 = Ti.UI.createImageView({image:'images/slider.png',height:60,width:340, top:260});
   mainView.add(slider2);
-  
+  var slider2Lbl = Ti.UI.createLabel({
+          top: 165,height:20,font:{fontSize:13,fontWeight:'bold'},color:'#b77f2f',
+          left: 140,width:100,
+          text:"Books"
+  }); 
+  mainView.add(slider2Lbl);
+   
   var slider3 = Ti.UI.createImageView({image:'images/slider.png',height:60,width:340, top:390});
   mainView.add(slider3);
-  
+  var slider3Lbl = Ti.UI.createLabel({
+          top: 295,height:20,font:{fontSize:13,fontWeight:'bold'},color:'#b77f2f',
+          left: 135,width:100,
+          text:"Newsletter"
+  }); 
+  mainView.add(slider3Lbl);
+   
   bookshelf.addBooks(mainView);
   
   this.addNewsLetter(mainView);
