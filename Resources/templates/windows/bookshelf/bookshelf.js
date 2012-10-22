@@ -26,7 +26,7 @@ getView: function ()
 },
 addBooks:function(mainView)
 {
-	var books = bookshelf.getTopBooks();
+	
 	var topScrollView = Titanium.UI.createScrollView
 	({
            layout:"horizontal",backgroundColor:'transparent',contentWidth:'auto',
@@ -34,82 +34,54 @@ addBooks:function(mainView)
     });
     mainView.add(topScrollView);
     
-    for(var i =0;i<books.length;i++)
-    {
-    	var bookView = Titanium.UI.createImageView({image:'books/book.png',width:106,height:120,left:10,top:20});
+    Cloud.Objects.query({classname:'books',page:1,per_page:10}, function(e){
     	
-    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#fff',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:65,height:70,top:0,backgroundColor:'transparent'});
-    	letterText.value =books[i].name;
-    	bookView.add(letterText);
-    	
-    	var bookInfo = new Object();
-    	bookInfo["url"] = books[i].url;
+    	var books = e.books;
+    	for(var i =0;i<books.length;i++)
+        {
+    	    var bookView = Titanium.UI.createImageView({image:books[i].image,width:86,height:90,left:10,top:20});
+    	    
+    	    var bookInfo = new Object();
+    	    bookInfo["url"] = books[i].content;
         
-        bookView.bookInfo = bookInfo;
-        this.attachEvents(bookView);
-        topScrollView.add(bookView);
+            bookView.bookInfo = bookInfo;
+            bookshelf.attachEvents(bookView);
+            topScrollView.add(bookView);
     
-    }
+         }
+		
+	})
+	
+   
+	 
     
     
-    var books = bookshelf.getBottomBooks();
     var bottomScrollView = Titanium.UI.createScrollView
 	({
            layout:"horizontal",height:120,backgroundColor:'transparent',contentWidth:'auto',
            top:190,showHorizontalScrollIndicator:true,left:0,
     });
      mainView.add(bottomScrollView);
-     
-    for(var i =0;i<books.length;i++)
-    {
-    	var bookView = Titanium.UI.createImageView({image:'books/book.png',width:106,height:120,left:10,top:0});
-    	bookView.image = books[i].image;
-    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#5ea1ba',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:65,height:70,top:5,backgroundColor:'transparent'});
-    	letterText.value =books[i].name;
-    	bookView.add(letterText);
+     Cloud.Objects.query({classname:'other_books',page:1,per_page:10}, function(e){
     	
-    	var bookInfo = new Object();
-    	bookInfo["url"] = books[i].url;
+    	var books = e.other_books;
+    	for(var i =0;i<books.length;i++)
+        {
+    	    var bookView = Titanium.UI.createImageView({image:'books/book.png',width:100,height:110,left:10,top:0});
+    	    bookView.image = books[i].image;
+    	   
+    	    var bookInfo = new Object();
+    	    bookInfo["url"] = books[i].content;
         
-        bookView.bookInfo = bookInfo;
-        this.attachEvents(bookView);
-        bottomScrollView.add(bookView);
-    }
+            bookView.bookInfo = bookInfo;
+            bookshelf.attachEvents(bookView);
+            bottomScrollView.add(bookView);
+    
+         }
+		
+	})
     
    
-},
-getBottomBooks:function()
-{
-	var books = new Array();
-	
-	var book = new Object();
-	book.image = "images/bbook.png";
-	book.name = "The Hand Book";
-	book.url =  "books/handbook.pdf";
-	books.push(book);
-
-	
-	return books;
-},
-getTopBooks:function()
-{
-	var books = new Array();
-	
-	var book = new Object();
-	book.image = "books/book.png";
-	book.name = "2011 Annual Report";
-	book.url =  "books/book1.pdf";
-	books.push(book);
-
-	var book = new Object();
-	book.image = "books/book.png";
-	book.name = "2011 Girls' Education Yearbook";
-	book.url =  "books/book2.pdf";
-	books.push(book);
-
-
-	
-	return books;
 },
 addNewsLetter:function(mainView)
 {
@@ -119,109 +91,43 @@ addNewsLetter:function(mainView)
            layout:"horizontal",height:100,backgroundColor:'transparent',contentWidth:'auto',contentHeight:'auto',
            bottom:70,showHorizontalScrollIndicator:true,left:0,
     });
-    var letters = bookshelf.getLetters();
     
-    for(var i =0;i<letters.length;i++)
-    {
-    	var letterView = Titanium.UI.createView({color:'#000',width:96,height:60,left:20,bottom:0,backgroundColor:'transparent'});
+    Cloud.Objects.query({classname:'newsletters',page:1,per_page:10}, function(e){
     	
-    	var letterText = Titanium.UI.createTextField({left:15,top:2,font:{fontSize:7,fontWeight:'normal'},width:96,height:10,top:0,backgroundColor:'transparent'});
-    	letterText.value =letters[i].name;
+    	var newsletters = e.newsletters;
+    	for(var i =0;i<newsletters.length;i++)
+        {
+    	    var letterView = Titanium.UI.createView({color:'#000',width:96,height:60,left:20,bottom:0,backgroundColor:'transparent'});
     	
-    	var letterImage = Titanium.UI.createImageView({width:96,height:60,left:0,bottom:0});
-        letterImage.image = letters[i].image;
-        letterImage.add(letterText);
+    	    var letterText = Titanium.UI.createTextField({left:15,top:2,font:{fontSize:7,fontWeight:'normal'},width:96,height:10,top:0,backgroundColor:'transparent'});
+    	    letterText.value =newsletters[i].title;
+    	
+    	    var letterImage = Titanium.UI.createImageView({width:96,height:60,left:0,bottom:0});
+            letterImage.image = 'images/newsletter.png';
+            letterImage.add(letterText);
         
-        letterView.add(letterImage);
-        scrollView.add(letterView);
-        letterImage.url = letters[i].url;
-        letterImage.addEventListener('click',function(e)
-	    { 
-	       quickview.show(e.source.url);
-	    });
+            letterView.add(letterImage);
+            scrollView.add(letterView);
+            letterImage.url = newsletters[i].content;
+            letterImage.addEventListener('dblclick',function(e)
+	        { 
+	           quickview.show(e.source.url);
+	        });
     
-    }
+         }
+		
+	})
+	
+    
    
     
     mainView.add(scrollView);
-},
-getLetters:function()
-{
-	var letters = new Array();
-	
-	var letter1 = new Object();
-	letter1.image = "images/newsletter.png";
-	letter1.name = "2012 Q3 Newsletter";
-	letter1.url = "http://www.roomtoread.org/page.aspx?pid=1392";
-	letters.push(letter1);
-	
-	var letter2 = new Object();
-	letter2.image = "images/newsletter.png";
-	letter2.name = "2012 Q2 Newsletter";
-	letter2.url = "http://www.roomtoread.org/page.aspx?pid=1299";
-	letters.push(letter2);
-
-	var letter3 = new Object();
-	letter3.image = "images/newsletter.png";
-	letter3.name = "2012 Q1 Newsletter";
-	letter3.url = "http://www.roomtoread.org/page.aspx?pid=1256";
-	letters.push(letter3);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2011 Q4 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=1170";
-	letters.push(letter);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2011 Q3 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=1067";
-	letters.push(letter);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2011 Q2 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=964";
-	letters.push(letter);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2011 Q1 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=904";
-	letters.push(letter);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2010 Q4 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=797";
-	letters.push(letter);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2010 Q3 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=735";
-	letters.push(letter);
-
-	var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2010 Q2 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=677";
-	letters.push(letter);
-
-    var letter = new Object();
-	letter.image = "images/newsletter.png";
-	letter.name = "2010 Q1 Newsletter";
-	letter.url = "http://www.roomtoread.org/page.aspx?pid=635";
-	letters.push(letter);
-	
-	return letters;
 },
 attachEvents:function(bookView)
 {
 	var counter = 0; 
 	
-	bookView.addEventListener('dblclick',function(e)
+	bookView.addEventListener('click',function(e)
 	{ 
 	    quickview.show(e.source.bookInfo["url"]);
 	});

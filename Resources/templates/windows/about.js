@@ -37,6 +37,12 @@ var render = function() {
   ({
           image: 'images/photo1.jpeg',width:100,height:100,left:10
   })
+  var topLabel1 = Ti.UI.createLabel({
+          top: -2,left: 20,width: 80,height:20,
+          text:"About Us",
+          font: {fontWeight: 'normal', fontFamily: 'Georgia', fontSize: 13, fontStyle: 'italic'},
+  })
+  image1.add(topLabel1);
   image1.addEventListener('click',function(e)
   { 
 	  self.detail_view.photo.image =  '/images/photo1.jpeg';
@@ -49,6 +55,12 @@ var render = function() {
   ({
           image: 'images/photo2.jpeg',width:100,height:100,left:110
   })
+  var topLabel2 = Ti.UI.createLabel({
+          top: -2,left:6,width: 80,height:20,
+          text:"Our Program",
+          font: {fontWeight: 'normal', fontFamily: 'Georgia', fontSize: 13, fontStyle: 'italic'},
+  })
+  image2.add(topLabel2);
   image2.addEventListener('click',function(e)
   { 
 	   self.detail_view.photo.image =  '/images/photo2.jpeg';
@@ -63,6 +75,12 @@ var render = function() {
   ({
           image: 'images/photo3.jpeg',width:100,height:100,left:210
   })
+  var topLabel3 = Ti.UI.createLabel({
+          top: -2,left:10,width: 80,height:20,
+          text:"Get Involved",
+          font: {fontWeight: 'normal', fontFamily: 'Georgia', fontSize: 13, fontStyle: 'italic'},
+  })
+  image3.add(topLabel3);
   image3.addEventListener('click',function(e)
   { 
 	 self.detail_view.photo.image =  '/images/photo3.jpeg'; 
