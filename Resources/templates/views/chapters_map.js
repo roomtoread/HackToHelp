@@ -1,5 +1,5 @@
 var render = function(event) {
-  var DateFormatter = nrequire('/lib/date_formatter'),
+var DateFormatter = nrequire('/lib/date_formatter'),
       CalendarView = nrequire('/ui/calendar_view');
   
   var self = {
@@ -10,7 +10,7 @@ var render = function(event) {
           className: 'event'
         }),
 
-        cal_view: CalendarView(event),
+       // cal_view: CalendarView(event),
 
         content_view: UI.createView({
           layout: 'vertical',
@@ -44,7 +44,7 @@ var render = function(event) {
 
   self.content_view.add(self.title);
   self.content_view.add(self.time);
-  self.row.add(self.cal_view);
+  //self.row.add(self.cal_view);
   self.row.add(self.content_view);
 
   return self;

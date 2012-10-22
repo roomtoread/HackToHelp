@@ -1,6 +1,6 @@
 var render = function() {
   var topBanner = nrequire('/templates/views/top_banner'),
-      Controller = nrequire('/templates/controllers/events'),
+      Controller = nrequire('/templates/controllers/chapters'),
       SplitView = nrequire('/ui/split_view'),
       BorderShadows = nrequire('/ui/border_shadows');
 
@@ -29,7 +29,7 @@ var render = function() {
   self.win.add(self.split_view);
   self.win.add(self.donate_banner);
   self.split_view.detailView.add(self.shadow);
-  self.split_view.masterView.add(self.table);
+  self.split_view.masterView.add(self.map);
 
   Controller(self);
   return self;

@@ -1,7 +1,7 @@
 require('../../specs/helpers/spec_helper')
 
 FbGraph = nrequire('lib/fb_graph')
-EventsWin = nrequire('/windows/events')
+ChaptersWin = nrequire('/windows/chapters')
 EventDetail = nrequire('templates/windows/event_detail')
 PropertyCache = nrequire('/lib/property_cache')
 
