@@ -10,11 +10,11 @@ PropertyCache.setup({cache_time: 600000});
 ACS_ADMIN_CREDENTIALS = {login: 'appcharity', password: '123456'};
 
 // FB SETUP
-Ti.Facebook.appid = "454480297929219";
+Ti.Facebook.appid = "126015560881913";
 Ti.Facebook.permissions = ['publish_stream', 'read_stream', 'offline_access'];
-FB_PAGE = 'msf.english'; // for page retrieval
-FB_ID = '33110852384'; // real fb id for fql calls. You can find out by inspecting fb links
+FB_PAGE = 'roomtoread'; // for page retrieval
+FB_ID = '34477598010'; // real fb id for fql calls. You can find out by inspecting fb links
 
 // TWITTER SETUP
-TWITTER_SCREEN_NAME = 'MSF_USA'; // For page link and tweet @
-Twitter.setup({consumerKey: "vmE9f6GtDLRYkh5aytSww", consumerSecret: "mQR4XfZGbQPyKoblElpXUF90fKzKSlWhR5me4ND0jEQ"});
+TWITTER_SCREEN_NAME = 'roomtoread'; // For page link and tweet @
+Twitter.setup({consumerKey: "R8DvsOrUGWmvXcMeFybrg", consumerSecret: "2rGGF6vvTlX0TApKiCrtMgLSYEtC8vEJMEVKmtL4"});
