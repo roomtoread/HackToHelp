@@ -1,4 +1,4 @@
-var render = function() {
+ var render = function() {
   var topBanner = nrequire('/templates/views/top_banner'),
       Controller = nrequire('/templates/controllers/events'),
       BorderShadows = nrequire('/ui/border_shadows');

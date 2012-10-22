@@ -1,4 +1,4 @@
-module.exports = function(view) {
+ module.exports = function(view) {
   var EventRow = nrequire('/templates/views/chapters_map'),
      // Detail = isIPad ? nrequire('/templates/views/event_detail') : nrequire('/templates/windows/event_detail'),
       PullToRefresh = nrequire('/ui/pull_to_refresh'),

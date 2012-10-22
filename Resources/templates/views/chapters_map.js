@@ -1,4 +1,4 @@
-var render = function(event) {
+ var render = function(event) {
 var DateFormatter = nrequire('/lib/date_formatter'),
       CalendarView = nrequire('/ui/calendar_view');
   

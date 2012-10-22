@@ -1,4 +1,4 @@
-module.exports = (function() {
+ module.exports = (function() {
   var newsWin = nrequire('/windows/news'),
       aboutWin = nrequire('/windows/about'),
      eventsWin = nrequire('/windows/events'),
