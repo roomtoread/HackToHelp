@@ -20,7 +20,7 @@ var render = function() {
         }),
     
         logo: UI.createImageView({
-          left: (isAndroid ? "5%" : "2%"),
+          left: (isAndroid ? "5%" : "3%"),
           width: 165,
           height: 50,
           hires: true,
