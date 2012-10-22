@@ -21,8 +21,8 @@ module.exports = (function() {
         }),
   
         photos: UI.createTab({
-          title: 'Photos',
-          icon:'/images/icons/tab_photo.png',
+          title: 'Books',
+          icon:'/images/icons/docs.png',
           window: photoGalleryWin().win
         }),
         
