@@ -1,4 +1,4 @@
-var render = function() {
+var render = function(imageType) {
   var Controller = nrequire('/templates/controllers/about_detail');
   
   var self = {
@@ -9,7 +9,7 @@ var render = function() {
         }),
 
         title: UI.createLabel({
-          text: 'About Us',
+          text: "About Us",
           top: 20,
           left: 20,
           height: Ti.UI.SIZE,
@@ -35,6 +35,7 @@ var render = function() {
 
         photo: UI.createImageView({
           height: "85%",
+          image:'/images/photo1.jpeg',
           top: 4,
           style_id: 'about_photo'
         }),
@@ -69,13 +70,16 @@ var render = function() {
           top: 10,
           left: 20,
           right: 20,
+          text:"We envision a world in which all children can pursue a quality education, reach their full potential and contribute to their community and the world."+
+                                   "To achieve this goal, we focus on two areas where we believe we can have the greatest impact: literacy and gender equality in education.  We work in collaboration with communities and local governments across Asia and Africa to develop literacy skills and a habit of reading among primary school children, and support girls to complete secondary school with the life skills they’ll need to succeed in school and beyond.",
           style_id: 'p4'
         })
       };
   
   if(isAndroid) self.photo.width = Scaler({width: 280});
-
+  
   self.view.add(self.title);
+  
   self.photo_container.add(self.photo);
   self.profile_view.add(self.photo_container);
   self.share_view.add(self.tweet_button);

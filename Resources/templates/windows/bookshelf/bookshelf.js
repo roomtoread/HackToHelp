@@ -26,25 +26,72 @@ getView: function ()
 },
 addBooks:function(mainView)
 {
-	var books = bookshelf.getBooks();
+	var books = bookshelf.getTopBooks();
+	var topScrollView = Titanium.UI.createScrollView
+	({
+           layout:"horizontal",backgroundColor:'transparent',contentWidth:'auto',
+           top:40,showHorizontalScrollIndicator:true,left:0, height:120
+    });
+    mainView.add(topScrollView);
+    
     for(var i =0;i<books.length;i++)
     {
-    	var bookView = Titanium.UI.createImageView({image:'books/book.png',width:106,height:120,left:100,top:220});
+    	var bookView = Titanium.UI.createImageView({image:'books/book.png',width:106,height:120,left:10,top:20});
     	
-    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#fff',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:85,height:60,top:0,backgroundColor:'transparent'});
+    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#fff',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:65,height:70,top:0,backgroundColor:'transparent'});
     	letterText.value =books[i].name;
     	bookView.add(letterText);
     	
-    	mainView.add(bookView);
     	var bookInfo = new Object();
     	bookInfo["url"] = books[i].url;
         
         bookView.bookInfo = bookInfo;
         this.attachEvents(bookView);
+        topScrollView.add(bookView);
     
     }
+    
+    
+    var books = bookshelf.getBottomBooks();
+    var bottomScrollView = Titanium.UI.createScrollView
+	({
+           layout:"horizontal",height:120,backgroundColor:'transparent',contentWidth:'auto',
+           top:190,showHorizontalScrollIndicator:true,left:0,
+    });
+     mainView.add(bottomScrollView);
+     
+    for(var i =0;i<books.length;i++)
+    {
+    	var bookView = Titanium.UI.createImageView({image:'books/book.png',width:106,height:120,left:10,top:0});
+    	bookView.image = books[i].image;
+    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#5ea1ba',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:65,height:70,top:5,backgroundColor:'transparent'});
+    	letterText.value =books[i].name;
+    	bookView.add(letterText);
+    	
+    	var bookInfo = new Object();
+    	bookInfo["url"] = books[i].url;
+        
+        bookView.bookInfo = bookInfo;
+        this.attachEvents(bookView);
+        bottomScrollView.add(bookView);
+    }
+    
+   
 },
-getBooks:function()
+getBottomBooks:function()
+{
+	var books = new Array();
+	
+	var book = new Object();
+	book.image = "images/bbook.png";
+	book.name = "The Hand Book";
+	book.url =  "books/handbook.pdf";
+	books.push(book);
+
+	
+	return books;
+},
+getTopBooks:function()
 {
 	var books = new Array();
 	
@@ -59,6 +106,7 @@ getBooks:function()
 	book.name = "2011 Girls' Education Yearbook";
 	book.url =  "books/book2.pdf";
 	books.push(book);
+
 
 	
 	return books;
@@ -177,6 +225,7 @@ attachEvents:function(bookView)
 	{ 
 	    quickview.show(e.source.bookInfo["url"]);
 	});
+	/*
     bookView.addEventListener('touchmove',function(e)
     { 
     	
@@ -216,9 +265,9 @@ attachEvents:function(bookView)
 	{ 
 		var pLeft = e.source.left;
 		var pTop = e.source.top;
+		alert("Top: "+pTop+" left: "+pLeft);
 		
-		
-     });
+    });*/
 
 },
 

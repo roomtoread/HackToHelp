@@ -9,7 +9,7 @@ show: function (path)
   	  backgroundColor:'red', width:340,height:480,align:'center' 
   });
   var done = Titanium.UI.createButtonBar({
-        labels:["Done"],
+        labels:["Close"],
         backgroundColor:'#cb9a53',
         style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
 		height:35,width:60,top:11,right:20
