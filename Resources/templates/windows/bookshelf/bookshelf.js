@@ -63,8 +63,8 @@ addBooks:function(mainView)
     for(var i =0;i<books.length;i++)
     {
     	var bookView = Titanium.UI.createImageView({image:'books/book.png',width:106,height:120,left:10,top:0});
-    	
-    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#fff',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:65,height:70,top:5,backgroundColor:'transparent'});
+    	bookView.image = books[i].image;
+    	var letterText = Titanium.UI.createTextArea({touchEnabled:false,color:'#5ea1ba',left:15,top:10,font:{fontSize:11,fontWeight:'normal'},width:65,height:70,top:5,backgroundColor:'transparent'});
     	letterText.value =books[i].name;
     	bookView.add(letterText);
     	
@@ -83,16 +83,11 @@ getBottomBooks:function()
 	var books = new Array();
 	
 	var book = new Object();
-	book.image = "books/book.png";
-	book.name = "20111 Annual Report";
-	book.url =  "books/book1.pdf";
+	book.image = "images/bbook.png";
+	book.name = "The Hand Book";
+	book.url =  "books/handbook.pdf";
 	books.push(book);
 
-	var book = new Object();
-	book.image = "books/book.png";
-	book.name = "20111 Girls' Education Yearbook";
-	book.url =  "books/book2.pdf";
-	books.push(book);
 	
 	return books;
 },
