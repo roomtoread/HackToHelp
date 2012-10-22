@@ -3,7 +3,8 @@
 module.exports = (function() {  
   var PropertyCache = nrequire('/lib/property_cache'),
       Twitter = nrequire('/lib/twitter'),
-      FbGraph = nrequire('/lib/fb_graph');
+      FbGraph = nrequire('/lib/fb_graph'),
+      Blogger = nrequire('/lib/blogger');
       
   var Cache = {},
   
@@ -41,6 +42,13 @@ module.exports = (function() {
         });
       },
       
+      getBlogNews = function(callback){
+        Blogger.getUpdates(function(news){
+          news.map(function(n){ n.kind = 'blogs'; });
+          callback(news);
+        });
+      },
+      
       getTwitterTimeline = function(callback){
         Twitter.timeline({screen_name: TWITTER_SCREEN_NAME}, function(news){
           news.map(function(n){ n.kind = 'twitter'; });
@@ -50,13 +58,15 @@ module.exports = (function() {
       
       getNews = _apiCallFactory('news', function(finishCall) {
         var _finishIfCompletedBoth = function(name, val) {
+        	Ti.API.info('finsihed ' + name)
               Cache[name] = val;
-              if(Cache.fb && Cache.twitter) {
-                var result = Cache.fb.concat(Cache.twitter);
+              if(Cache.fb && Cache.twitter && Cache.blogs) {
+                var result = Cache.fb.concat(Cache.twitter).concat(Cache.blogs);
                 finishCall(result);
               }
             };
         getFacebookNews(function(news){ _finishIfCompletedBoth('fb', news); });
+        getBlogNews(function(news){ _finishIfCompletedBoth('blogs', news); });
         getTwitterTimeline(function(news){ _finishIfCompletedBoth('twitter', news); });
       }),
       

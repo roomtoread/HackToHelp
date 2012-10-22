@@ -3,11 +3,15 @@ module.exports = function(view) {
       FbNewsRow = nrequire('/templates/views/fb_news_row'),
       FbNewsDetail = nrequire('/templates/windows/fb_news_detail'),
       TwitterNewsDetail = nrequire('/templates/windows/twitter_news_detail'),
+      BloggerNewsRow = nrequire('/templates/views/blogger_news_row'),
+      BloggerNewsDetail = nrequire('/templates/windows/blogger_news_detail'),
       PullToRefresh = nrequire('/ui/pull_to_refresh'),
       Repo = nrequire('/lib/repo');
       
   var VIEW_TYPES = {'fb': {detail: FbNewsDetail, row: FbNewsRow},
-                    'twitter': {detail: TwitterNewsDetail, row: TwitterNewsRow}},
+                    'twitter': {detail: TwitterNewsDetail, row: TwitterNewsRow},
+                    'blogs' : {detail:BloggerNewsDetail, row : BloggerNewsRow }
+                    },
       news = [],
   
       fillTable = function(rows) {

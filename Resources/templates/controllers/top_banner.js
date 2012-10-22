@@ -1,7 +1,7 @@
 module.exports = function(view) {
   var Repo = nrequire('/lib/repo');
       
-  var url = 'http://www.doctorswithoutborders.com/',
+  var url = 'http://www.roomtoread.org/',
   
       openDonateLink = function() {
         Ti.Platform.openURL(url);
